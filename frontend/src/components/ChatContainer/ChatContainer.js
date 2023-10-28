@@ -16,6 +16,8 @@ function ChatContainer() {
                 const newMessage = {text: messageText.trim(), sender: 'user'};
                 setMessages([...messages, newMessage]);
                 handleBotResponse(messageText.trim());
+            } else {
+                alert('Please enter a message');
             }
         }, 500);
     };

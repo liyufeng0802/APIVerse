@@ -12,3 +12,12 @@
 .message .MuiListItemText-root {
   word-break: break-word;
 }
+
+/*.message {*/
+/*  transition: opacity 0.3s ease-in-out;*/
+/*  opacity: 0;*/
+/*}*/
+
+/*.message.loaded {*/
+/*  opacity: 1;*/
+/*}*/
