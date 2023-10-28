@@ -1,11 +1,33 @@
+/* File: src/components/InputArea/InputArea.css */
+
 .input-area {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  padding: 10px; /* Padding for spacing around the input area */
+  border-top: 1px solid #e0e0e0; /* Light border separating the input area from the message list */
+  background-color: #ffffff; /* White background to match the chat container */
 }
 
 .input-area .MuiTextField-root {
   flex-grow: 1;
-  margin-right: 10px;
+  margin-right: 10px; /* Margin to space out the text field from the send button */
+  background-color: #f4f4f4; /* Light grey background for text field */
+  border-radius: 20px; /* Rounded corners for text field */
+}
+
+.input-area .MuiOutlinedInput-input {
+  padding: 10px 15px; /* Inner padding for text field */
+}
+
+.input-area .MuiButton-root {
+  background-color: #2979ff; /* Blue background to match user message color */
+  color: #ffffff; /* White text for button */
+  padding: 8px 16px; /* Padding for button */
+  border-radius: 20px; /* Rounded corners for button */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.input-area .MuiButton-root:hover {
+  background-color: #2962ff; /* Slightly darker blue on hover */
 }

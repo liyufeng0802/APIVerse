@@ -1,3 +1,5 @@
+/* File: src/components/Message/Message.css */
+
 .message {
   width: 100%;
   display: flex;
@@ -11,13 +13,40 @@
 
 .message .MuiListItemText-root {
   word-break: break-word;
+  padding: 10px 15px;  /* Increased padding for better spacing */
+  border-radius: 12px;  /* Rounded corners */
+  max-width: 70%;  /* Max width to ensure messages don’t stretch too far across the screen */
+  position: relative;  /* Relative positioning to allow pseudo-element styling */
 }
 
-/*.message {*/
-/*  transition: opacity 0.3s ease-in-out;*/
-/*  opacity: 0;*/
-/*}*/
+/* Differentiate user and bot messages */
+.message.user .MuiListItemText-root {
+  background-color: #2979ff;  /* A blue background for user messages */
+  color: #ffffff;  /* White text for readability */
+}
 
-/*.message.loaded {*/
-/*  opacity: 1;*/
-/*}*/
+.message.bot .MuiListItemText-root {
+  background-color: #f0f0f0;  /* A light grey background for bot messages */
+  color: #333;  /* Dark text for contrast */
+}
+
+/* Optional: Add tail-like appearance to messages */
+.message .MuiListItemText-root::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.message.user .MuiListItemText-root::before {
+  background-color: #2979ff;  /* Match user message background */
+  left: -5px;  /* Position to the left */
+  top: 10px;  /* Adjust top position for desired appearance */
+}
+
+.message.bot .MuiListItemText-root::before {
+  background-color: #f0f0f0;  /* Match bot message background */
+  right: -5px;  /* Position to the right */
+  top: 10px;  /* Adjust top position for desired appearance */
+}

@@ -11,3 +11,31 @@
   font-style: italic;
   margin-left: 10px;
 }
+
+.chat-container {
+  background-color: #ffffff; /* White background for clarity */
+  border-radius: 12px; /* Increased rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), 0 1px 1px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  margin: 2% auto; /* Centering with a percentage margin for more responsive spacing */
+  padding: 20px; /* Inner spacing */
+  max-width: 500px; /* Maximum width */
+  width: 90%; /* Respective width, will keep the container well spaced */
+  overflow: hidden; /* Hide overflow, which can be useful when dealing with rounded corners */
+  display: flex;
+  flex-direction: column; /* Ensure children elements are stacked vertically */
+}
+
+/* Optional: You might want to add a header to your chat container */
+.chat-header {
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-bottom: 20px; /* Space below header */
+  text-align: center; /* Centered header text */
+}
+
+/* Update the typing indicator style if you have one */
+.typing-indicator {
+  font-style: italic;
+  color: #888; /* Grey text */
+  margin: 10px 0; /* Spacing around indicator */
+}
