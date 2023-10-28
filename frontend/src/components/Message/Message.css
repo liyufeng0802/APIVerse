@@ -1,0 +1,14 @@
+.message {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.message.right {
+  justify-content: flex-end;
+}
+
+.message .MuiListItemText-root {
+  word-break: break-word;
+}

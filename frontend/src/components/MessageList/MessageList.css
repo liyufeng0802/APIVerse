@@ -1,0 +1,7 @@
+.message-list {
+  overflow-y: auto;
+  max-height: 400px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}

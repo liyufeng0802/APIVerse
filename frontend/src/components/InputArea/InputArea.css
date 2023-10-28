@@ -1,0 +1,11 @@
+.input-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.input-area .MuiTextField-root {
+  flex-grow: 1;
+  margin-right: 10px;
+}
