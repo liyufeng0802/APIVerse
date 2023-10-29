@@ -20,7 +20,7 @@ import {
   Text,
   useColorModeValue, useDisclosure, useToast,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import {MdAutoAwesome, MdBolt, MdEdit, MdLock, MdPerson} from 'react-icons/md';
 import Bg from '../public/img/chat/bg-image.png';
 import {response} from "express";
@@ -51,38 +51,11 @@ export default function Chat(props: { apiKeyApp: string }) {
       return;
     }
     const msg = `Import documentation from ${apiDocURL}`;
-    console.log(msg);
     setInputCode(msg);
-    console.log(`Test: ${inputCode}`);
-    handleTranslate();
-  }, [apiDocURL]); // The second argument is an array of dependencies
+  }, [apiDocURL]);
 
-
-  // API Key
-  // const [apiKey, setApiKey] = useState<string>(apiKeyApp);
-  const borderColor = useColorModeValue('gray.200', 'whiteAlpha.200');
-  const inputColor = useColorModeValue('navy.700', 'white');
-  const iconColor = useColorModeValue('brand.500', 'white');
-  const grayColor = useColorModeValue('gray.500', 'gray.500');
-
-  const bgIcon = useColorModeValue(
-    'linear-gradient(180deg, #FBFBFF 0%, #CACAFF 100%)',
-    'whiteAlpha.200',
-  );
-  const brandColor = useColorModeValue('brand.500', 'white');
-  const buttonBg = useColorModeValue('white', 'whiteAlpha.100');
-  const gray = useColorModeValue('gray.500', 'white');
-  const buttonShadow = useColorModeValue(
-    '14px 27px 45px rgba(112, 144, 176, 0.2)',
-    'none',
-  );
-  const textColor = useColorModeValue('navy.700', 'white');
-  const placeholderColor = useColorModeValue(
-    { color: 'gray.500' },
-    { color: 'whiteAlpha.600' },
-  );
-  const handleTranslate = async () => {
-    const apiKey = apiKeyApp;
+  const handleTranslate = useCallback(async () => {
+        const apiKey = apiKeyApp;
     setInputOnSubmit(inputCode);
 
     // Chat post conditions(maximum number of characters, valid message etc.)
@@ -144,35 +117,130 @@ export default function Chat(props: { apiKeyApp: string }) {
     }
 
     fetchData();
+  }, [inputCode, apiKeyApp, model]);
 
-    //@ts-ignore
-    // let response = {
-    //     body: {
-    //         summary: "123981239812938129389123"
-    //     }
-    // }
-
-    //@ts-ignore
+  useEffect(() => {
+    if (inputCode) {
+      handleTranslate();
+    }
+  }, [inputCode, handleTranslate]);
 
 
-    // if (!data) {
-    //   setLoading(false);
-    //   alert('Something went wrong');
-    //   return;
-    // }
+  // API Key
+  // const [apiKey, setApiKey] = useState<string>(apiKeyApp);
+  const borderColor = useColorModeValue('gray.200', 'whiteAlpha.200');
+  const inputColor = useColorModeValue('navy.700', 'white');
+  const iconColor = useColorModeValue('brand.500', 'white');
+  const grayColor = useColorModeValue('gray.500', 'gray.500');
 
-    // const reader = data.getReader();
-    // const decoder = new TextDecoder();
-    // let done = false;
-
-    // while (!done) {
-    //   setLoading(true);
-    //   const { value, done: doneReading } = await reader.read();
-    //   done = doneReading;
-    //   const chunkValue = decoder.decode(value);
-    //   setOutputCode((prevCode) => prevCode + chunkValue);
-    // }
-  };
+  const bgIcon = useColorModeValue(
+    'linear-gradient(180deg, #FBFBFF 0%, #CACAFF 100%)',
+    'whiteAlpha.200',
+  );
+  const brandColor = useColorModeValue('brand.500', 'white');
+  const buttonBg = useColorModeValue('white', 'whiteAlpha.100');
+  const gray = useColorModeValue('gray.500', 'white');
+  const buttonShadow = useColorModeValue(
+    '14px 27px 45px rgba(112, 144, 176, 0.2)',
+    'none',
+  );
+  const textColor = useColorModeValue('navy.700', 'white');
+  const placeholderColor = useColorModeValue(
+    { color: 'gray.500' },
+    { color: 'whiteAlpha.600' },
+  );
+  // const handleTranslate = async () => {
+  //   const apiKey = apiKeyApp;
+  //   setInputOnSubmit(inputCode);
+  //
+  //   // Chat post conditions(maximum number of characters, valid message etc.)
+  //   const maxCodeLength = model === 'gpt-3.5-turbo' ? 700 : 700;
+  //
+  //   if (!inputCode) {
+  //     alert('Please enter your message.');
+  //     return;
+  //   }
+  //
+  //   if (inputCode.length > maxCodeLength) {
+  //     alert(
+  //       `Please enter code less than ${maxCodeLength} characters. You are currently at ${inputCode.length} characters.`,
+  //     );
+  //     return;
+  //   }
+  //   setOutputCode(' ');
+  //   setLoading(true);
+  //   const controller = new AbortController();
+  //   const body: ChatBody = {
+  //     inputCode,
+  //     model,
+  //     apiKey,
+  //   };
+  //
+  //   let data = ""
+  //
+  //   async function fetchData() {
+  //     try {
+  //       const response = await axios.get('http://127.0.0.1:105/import', {
+  //         params: { "url": 'https://icanhazdadjoke.com/api#endpoints' },
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       });
+  //
+  //       console.log("test0")
+  //
+  //       // Accessing the response body
+  //       data = response.data;
+  //
+  //       // Now you can use responseBody as needed
+  //       console.log("123test")
+  //       console.log(data);
+  //
+  //           // @ts-ignore
+  //       let summary = data['summary']
+  //       // summary = "123981239812938129389123"
+  //
+  //       console.log(summary)
+  //
+  //       setOutputCode(summary)
+  //
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error('Error fetching data: ', error);
+  //       alert('Something went wrong when fetching from the API. Make sure to use a valid API key.');
+  //     }
+  //   }
+  //
+  //   fetchData();
+  //
+  //   //@ts-ignore
+  //   // let response = {
+  //   //     body: {
+  //   //         summary: "123981239812938129389123"
+  //   //     }
+  //   // }
+  //
+  //   //@ts-ignore
+  //
+  //
+  //   // if (!data) {
+  //   //   setLoading(false);
+  //   //   alert('Something went wrong');
+  //   //   return;
+  //   // }
+  //
+  //   // const reader = data.getReader();
+  //   // const decoder = new TextDecoder();
+  //   // let done = false;
+  //
+  //   // while (!done) {
+  //   //   setLoading(true);
+  //   //   const { value, done: doneReading } = await reader.read();
+  //   //   done = doneReading;
+  //   //   const chunkValue = decoder.decode(value);
+  //   //   setOutputCode((prevCode) => prevCode + chunkValue);
+  //   // }
+  // };
   // -------------- Copy Response --------------
   // const copyToClipboard = (text: string) => {
   //   const el = document.createElement('textarea');
