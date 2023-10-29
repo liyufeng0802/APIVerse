@@ -11,8 +11,8 @@ import axios from 'axios';
 import APIModal from "@/components/apiModal";
 
 type ChatMessage = {
-  type: 'sent' | 'received';
-  message: string;
+    type: 'sent' | 'received';
+    message: string;
 };
 
 type ChatHistory = ChatMessage[];
@@ -102,11 +102,11 @@ export default function Chat(props: { apiKeyApp: string }) {
                 console.log(summary)
 
 
-                const newChat: ChatMessage = { type: 'sent', message: inputCode };
+                const newChat: ChatMessage = {type: 'sent', message: inputCode};
                 setChatHistory((prevChats) => [...prevChats, newChat]);
 
                 setOutputCode(summary);
-                const newReply: ChatMessage = { type: 'received', message: summary };
+                const newReply: ChatMessage = {type: 'received', message: summary};
                 console.log(newReply)
                 setChatHistory((prevChats) => [...prevChats, newReply]);
                 setLoading(false);
@@ -154,7 +154,7 @@ export default function Chat(props: { apiKeyApp: string }) {
         setInputCode(Event.target.value);
     };
 
-return (
+    return (
         <Flex
             w="100%"
             pt={{base: '70px', md: '0px'}}
@@ -255,45 +255,50 @@ return (
                     </Flex>
                 </Flex>
 <Flex direction="column" w="100%" mx="auto" mb={'auto'}>
-  {chatHistory.map((chat, index) => (
-    <Flex key={index} w="100%" align={'center'} mb="10px">
-      <Flex
-        borderRadius="full"
-        justify="center"
-        align="center"
-        bg={chat.type === 'sent' ? 'transparent' : 'linear-gradient(15.46deg, #4A25E1 26.3%, #7B5AFF 86.4%)'}
-        me="20px"
-        h="40px"
-        minH="40px"
-        minW="40px"
-      >
-        <Icon
-          as={chat.type === 'sent' ? MdPerson : MdAutoAwesome}
-          width="20px"
-          height="20px"
-          color={chat.type === 'sent' ? brandColor : 'white'}
-        />
-      </Flex>
-      <Flex
-        p="22px"
-        border="1px solid"
-        borderColor={borderColor}
-        borderRadius="14px"
-        w="100%"
-        zIndex={'2'}
-      >
-        <Text
-          color={textColor}
-          fontWeight="600"
-          fontSize={{base: 'sm', md: 'md'}}
-          lineHeight={{base: '24px', md: '26px'}}
-        >
-          {chat.message}
-        </Text>
-      </Flex>
-    </Flex>
-  ))}
+    {chatHistory.map((chat, index) => (
+        <Flex key={index} w="100%" align={'center'} mb="10px">
+            <Flex
+                borderRadius="full"
+                justify="center"
+                align="center"
+                bg={chat.type === 'sent' ? 'transparent' : 'linear-gradient(15.46deg, #4A25E1 26.3%, #7B5AFF 86.4%)'}
+                me="20px"
+                h="40px"
+                minH="40px"
+                minW="40px"
+            >
+                <Icon
+                    as={chat.type === 'sent' ? MdPerson : MdAutoAwesome}
+                    width="20px"
+                    height="20px"
+                    color={chat.type === 'sent' ? brandColor : 'white'}
+                />
+            </Flex>
+            <Flex
+                p="22px"
+                border="1px solid"
+                borderColor={borderColor}
+                borderRadius="14px"
+                w="100%"
+                zIndex={'2'}
+            >
+                {chat.type === 'sent' ? (
+                    <Text
+                        color={textColor}
+                        fontWeight="600"
+                        fontSize={{base: 'sm', md: 'md'}}
+                        lineHeight={{base: '24px', md: '26px'}}
+                    >
+                        {chat.message}
+                    </Text>
+                ) : (
+                    <MessageBoxChat output={chat.message} />
+                )}
+            </Flex>
+        </Flex>
+    ))}
 </Flex>
+
 
                 {/* Chat Input */}
                 <Flex
