@@ -4,7 +4,7 @@
 import MessageBoxChat from '@/components/MessageBox';
 import {ChatBody, OpenAIModel} from '@/types/types';
 import {Button, Flex, Icon, Img, Input, Text, useColorModeValue, useDisclosure,} from '@chakra-ui/react';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {MdAutoAwesome, MdEdit, MdPerson} from 'react-icons/md';
 import Bg from '../public/img/chat/bg-image.png';
 import axios from 'axios';
@@ -36,6 +36,17 @@ export default function Chat(props: { apiKeyApp: string }) {
     const [apiDocURL, setURL] = useState('');
 
     const [chatHistory, setChatHistory] = useState<ChatHistory>([]);
+
+    const messagesEndRef = useRef(null);
+
+    const scrollToBottom = () => {
+        // @ts-ignore
+        messagesEndRef.current?.scrollIntoView({behavior: "smooth"});
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [chatHistory]);
 
 
     useEffect(() => {
@@ -118,12 +129,6 @@ export default function Chat(props: { apiKeyApp: string }) {
 
         fetchData();
     }, [inputCode, apiKeyApp, model]);
-
-    useEffect(() => {
-        if (inputCode) {
-            handleTranslate();
-        }
-    }, [inputCode, handleTranslate]);
 
 
     // API Key
@@ -254,50 +259,51 @@ export default function Chat(props: { apiKeyApp: string }) {
                         <MessageBoxChat output={outputCode}/>
                     </Flex>
                 </Flex>
-<Flex direction="column" w="100%" mx="auto" mb={'auto'}>
-    {chatHistory.map((chat, index) => (
-        <Flex key={index} w="100%" align={'center'} mb="10px">
-            <Flex
-                borderRadius="full"
-                justify="center"
-                align="center"
-                bg={chat.type === 'sent' ? 'transparent' : 'linear-gradient(15.46deg, #4A25E1 26.3%, #7B5AFF 86.4%)'}
-                me="20px"
-                h="40px"
-                minH="40px"
-                minW="40px"
-            >
-                <Icon
-                    as={chat.type === 'sent' ? MdPerson : MdAutoAwesome}
-                    width="20px"
-                    height="20px"
-                    color={chat.type === 'sent' ? brandColor : 'white'}
-                />
-            </Flex>
-            <Flex
-                p="22px"
-                border="1px solid"
-                borderColor={borderColor}
-                borderRadius="14px"
-                w="100%"
-                zIndex={'2'}
-            >
-                {chat.type === 'sent' ? (
-                    <Text
-                        color={textColor}
-                        fontWeight="600"
-                        fontSize={{base: 'sm', md: 'md'}}
-                        lineHeight={{base: '24px', md: '26px'}}
-                    >
-                        {chat.message}
-                    </Text>
-                ) : (
-                    <MessageBoxChat output={chat.message} />
-                )}
-            </Flex>
-        </Flex>
-    ))}
-</Flex>
+                <Flex direction="column" w="100%" mx="auto" mb={'auto'}>
+                    {chatHistory.map((chat, index) => (
+                        <Flex key={index} w="100%" align={'center'} mb="10px">
+                            <Flex
+                                borderRadius="full"
+                                justify="center"
+                                align="center"
+                                bg={chat.type === 'sent' ? 'transparent' : 'linear-gradient(15.46deg, #4A25E1 26.3%, #7B5AFF 86.4%)'}
+                                me="20px"
+                                h="40px"
+                                minH="40px"
+                                minW="40px"
+                            >
+                                <Icon
+                                    as={chat.type === 'sent' ? MdPerson : MdAutoAwesome}
+                                    width="20px"
+                                    height="20px"
+                                    color={chat.type === 'sent' ? brandColor : 'white'}
+                                />
+                            </Flex>
+                            <Flex
+                                p="22px"
+                                border="1px solid"
+                                borderColor={borderColor}
+                                borderRadius="14px"
+                                w="100%"
+                                zIndex={'2'}
+                            >
+                                {chat.type === 'sent' ? (
+                                    <Text
+                                        color={textColor}
+                                        fontWeight="600"
+                                        fontSize={{base: 'sm', md: 'md'}}
+                                        lineHeight={{base: '24px', md: '26px'}}
+                                    >
+                                        {chat.message}
+                                    </Text>
+                                ) : (
+                                    <MessageBoxChat output={chat.message}/>
+                                )}
+                            </Flex>
+                        </Flex>
+                    ))}
+                    <div ref={messagesEndRef}/>
+                </Flex>
 
 
                 {/* Chat Input */}
@@ -340,7 +346,7 @@ export default function Chat(props: { apiKeyApp: string }) {
                                 bg: 'linear-gradient(15.46deg, #4A25E1 26.3%, #7B5AFF 86.4%)',
                             },
                         }}
-                        onClick={handleTranslate}
+                        onClick={() => handleTranslate()}
                         isLoading={loading ? true : false}
                     >
                         Submit
