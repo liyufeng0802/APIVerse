@@ -83,13 +83,17 @@ export default function Chat(props: { apiKeyApp: string }) {
             console.log(summary)
 
 
-            const newChat: ChatMessage = {type: 'sent', message: inputCode};
-            setChatHistory((prevChats) => [...prevChats, newChat]);
+            const newChat: ChatMessage =
+                {
+                    type: 'sent',
+                    message: `Import documentation from ${apiDocURL}`
+                };
+            setChatHistory((prevChats) => [...prevChats, newChat].filter(chat => chat.message.trim() !== ""));
 
             setOutputCode(summary);
             const newReply: ChatMessage = {type: 'received', message: summary};
             console.log(newReply)
-            setChatHistory((prevChats) => [...prevChats, newReply]);
+            setChatHistory((prevChats) => [...prevChats, newReply].filter(chat => chat.message.trim() !== ""));
             setLoading(false);
         } catch (error) {
             console.error('Error fetching data: ', error);
@@ -97,7 +101,7 @@ export default function Chat(props: { apiKeyApp: string }) {
         }
     }
 
-    const handleTranslate = useCallback(async () => {
+    const handleTranslate = async () => {
         const apiKey = apiKeyApp;
         setInputOnSubmit(inputCode);
 
@@ -126,8 +130,9 @@ export default function Chat(props: { apiKeyApp: string }) {
             apiKey,
         };
 
-        fetchData();
-    }, [inputCode, apiKeyApp, model]);
+        // fetchData();
+        setLoading(false);
+    };
 
 
     // API Key
@@ -184,82 +189,8 @@ export default function Chat(props: { apiKeyApp: string }) {
                 <Flex direction={'column'} w="100%" mb={outputCode ? '20px' : 'auto'}>
                 </Flex>
                 {/* Main Box */}
-                <Flex
-                    direction="column"
-                    w="100%"
-                    mx="auto"
-                    display={outputCode ? 'flex' : 'none'}
-                    mb={'auto'}
-                >
-                    <Flex w="100%" align={'center'} mb="10px">
-                        <Flex
-                            borderRadius="full"
-                            justify="center"
-                            align="center"
-                            bg={'transparent'}
-                            border="1px solid"
-                            borderColor={borderColor}
-                            me="20px"
-                            h="40px"
-                            minH="40px"
-                            minW="40px"
-                        >
-                            <Icon
-                                as={MdPerson}
-                                width="20px"
-                                height="20px"
-                                color={brandColor}
-                            />
-                        </Flex>
-                        <Flex
-                            p="22px"
-                            border="1px solid"
-                            borderColor={borderColor}
-                            borderRadius="14px"
-                            w="100%"
-                            zIndex={'2'}
-                        >
-                            <Text
-                                color={textColor}
-                                fontWeight="600"
-                                fontSize={{base: 'sm', md: 'md'}}
-                                lineHeight={{base: '24px', md: '26px'}}
-                            >
-                                {inputOnSubmit}
-                            </Text>
-                            <Icon
-                                cursor="pointer"
-                                as={MdEdit}
-                                ms="auto"
-                                width="20px"
-                                height="20px"
-                                color={gray}
-                            />
-                        </Flex>
-                    </Flex>
-                    <Flex w="100%">
-                        <Flex
-                            borderRadius="full"
-                            justify="center"
-                            align="center"
-                            bg={'linear-gradient(15.46deg, #4A25E1 26.3%, #7B5AFF 86.4%)'}
-                            me="20px"
-                            h="40px"
-                            minH="40px"
-                            minW="40px"
-                        >
-                            <Icon
-                                as={MdAutoAwesome}
-                                width="20px"
-                                height="20px"
-                                color="white"
-                            />
-                        </Flex>
-                        <MessageBoxChat output={outputCode}/>
-                    </Flex>
-                </Flex>
                 <Flex direction="column" w="100%" mx="auto" mb={'auto'}>
-                    {chatHistory.map((chat, index) => (
+                    {chatHistory.filter(chat => chat.message.trim() !== "").map((chat, index) => (
                         <Flex key={index} w="100%" align={'center'} mb="10px">
                             <Flex
                                 borderRadius="full"
@@ -350,7 +281,7 @@ export default function Chat(props: { apiKeyApp: string }) {
                     >
                         Submit
                     </Button>
-                    <APIModal setApiKey={setURL} sidebar={true}/>
+                    <APIModal setApiKey={setURL} sidebar={true} func_2_call={fetchData}/>
                 </Flex>
 
                 <Flex
