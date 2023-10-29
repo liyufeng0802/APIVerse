@@ -5,7 +5,7 @@
     },
     {
         "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/'",
-        "description": " 'Fetch a random dad joke in plain text'"
+        "description": " 'Fetch a random dad joke as text'"
     },
     {
         "curl": "'curl https://icanhazdadjoke.com/slack'",
@@ -13,22 +13,22 @@
     },
     {
         "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/j/<joke_id>'",
-        "description": " 'Fetch a specific dad joke in JSON'"
+        "description": " 'Fetch a specific dad joke with joke_id'"
     },
     {
         "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/j/<joke_id>'",
-        "description": " 'Fetch a specific dad joke in text'"
+        "description": " 'Fetch a specific dad joke as text with joke_id'"
     },
     {
         "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/search'",
-        "description": " 'Search for dad jokes in JSON format'"
+        "description": " 'Search for dad jokes'"
     },
     {
         "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/search'",
-        "description": " 'Search for dad jokes in plain text format'"
+        "description": " 'Receive search results back as text'"
     },
     {
-        "curl": "'curl -X POST -d \\'{\"query\": \"query { joke {id joke permalink } }\"}\\' -H \"Content-Type: application/json\" https://icanhazdadjoke.com/graphql'",
-        "description": " 'Fetch a random dad joke in GraphQL'"
+        "curl": "'curl -H \"Accept: application/json\" \"https://icanhazdadjoke.com/search?term=<search_term>\"'",
+        "description": " 'Search through jokes with a search term'"
     }
 ]

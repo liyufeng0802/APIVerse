@@ -13,10 +13,11 @@ class Import_module:
     def addNewURL(self, url):
         html_format = requests.get(url)
         text = html_format.text
-        prompt = "On this website, is there an API documentation?\n" + text + "\nIf there is no API documentation on the webpage, print me a No. If there is API documentation, can you write me the curl requests with those APIs that do not require authentication including descriptions?  I want you summarize them in an python array list format, where each list element is a tuple, ex [(curl request1, description for the endpoint1), (curl request2, description for the endpoint2)]"
+        prompt = f"On this website (at the bottom of this prompt), is there an API documentation?\nIf there is no API documentation on the webpage, print me a No. If there is API documentation, can you write me the curl requests with those APIs that do not require authentication including descriptions?  I want you summarize the available APIs in an python array list format, where each list element is a tuple, ex [(curl request1, description for the endpoint1), (curl request2, description for the endpoint2)]. If using any of the quotes for the tuples, only use single quote. also, avoid any other special chars, such as $, #, etc, just give me clean tuple lists. you have to use single quoteBelow is the content of the website: {text}"
         # print(prompt)
         test_model = GPT_module()
         response = test_model.query(prompt)
+        print("Response: ", response)
         curl_requests = ""
         found = False
         for c in response:
@@ -27,6 +28,7 @@ class Import_module:
                 break
             if found:
                 curl_requests += c
+        print(curl_requests)
         regex = r"\(.*\)"
         curl_list = re.findall(regex, curl_requests)
         self.saveCurlList(curl_list)
