@@ -57,6 +57,46 @@ export default function Chat(props: { apiKeyApp: string }) {
         setInputCode(msg);
     }, [apiDocURL]);
 
+
+    async function fetchData() {
+        try {
+            const response = await axios.get('http://127.0.0.1:105/import', {
+                params: {"url": 'https://icanhazdadjoke.com/api#endpoints'},
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            console.log("test0")
+
+            // Accessing the response body
+            let data = response.data;
+
+            // Now you can use responseBody as needed
+            console.log("123test")
+            console.log(data);
+
+            // @ts-ignore
+            let summary = data['summary']
+            // summary = "123981239812938129389123"
+
+            console.log(summary)
+
+
+            const newChat: ChatMessage = {type: 'sent', message: inputCode};
+            setChatHistory((prevChats) => [...prevChats, newChat]);
+
+            setOutputCode(summary);
+            const newReply: ChatMessage = {type: 'received', message: summary};
+            console.log(newReply)
+            setChatHistory((prevChats) => [...prevChats, newReply]);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching data: ', error);
+            alert('Something went wrong when fetching from the API. Make sure to use a valid API key.');
+        }
+    }
+
     const handleTranslate = useCallback(async () => {
         const apiKey = apiKeyApp;
         setInputOnSubmit(inputCode);
@@ -85,47 +125,6 @@ export default function Chat(props: { apiKeyApp: string }) {
             model,
             apiKey,
         };
-
-        let data = ""
-
-        async function fetchData() {
-            try {
-                const response = await axios.get('http://127.0.0.1:105/import', {
-                    params: {"url": 'https://icanhazdadjoke.com/api#endpoints'},
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                console.log("test0")
-
-                // Accessing the response body
-                data = response.data;
-
-                // Now you can use responseBody as needed
-                console.log("123test")
-                console.log(data);
-
-                // @ts-ignore
-                let summary = data['summary']
-                // summary = "123981239812938129389123"
-
-                console.log(summary)
-
-
-                const newChat: ChatMessage = {type: 'sent', message: inputCode};
-                setChatHistory((prevChats) => [...prevChats, newChat]);
-
-                setOutputCode(summary);
-                const newReply: ChatMessage = {type: 'received', message: summary};
-                console.log(newReply)
-                setChatHistory((prevChats) => [...prevChats, newReply]);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching data: ', error);
-                alert('Something went wrong when fetching from the API. Make sure to use a valid API key.');
-            }
-        }
 
         fetchData();
     }, [inputCode, apiKeyApp, model]);
