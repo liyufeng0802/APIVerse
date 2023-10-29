@@ -2,7 +2,9 @@ from gpt_module import GPT_module
 from action_module.router import Router
 import json
 import requests
-import subprocess
+import subprocess 
+from action_module.questioner import Questioner
+from action_module.arg_retriever import Arg_Retriever
 import re
 
 
@@ -33,32 +35,73 @@ class Caller:
         return information_from_AI
     
     # Given user propmt, decide what functions to call
-    def process_user_request(self, user_request):
-        router = Router()
+    def process_user_request(self, user_request, conversation):
+        # Only when currrent_curl doesn't exist, we need rounter to find corresponding curl
+        f = open('database/current_curl.json')
+        current_url_data = json.load(f)
+        if "curl" not in current_url_data or current_url_data["curl"] == None:
+            router = Router()
 
-        complete_resopnse = router.detector(user_request)
-        # print(complete_resopnse)
-        
-        # You should call the following curl: "curl -H 'Accept: application/json' https://icanhazdadjoke.com/".
-        result= re.search(r'["\']((curl).*?)["\']', complete_resopnse)
-        curl = result.group(1)
-        # print(curl)
+            complete_resopnse = router.detector(user_request)
+            print(complete_resopnse)
+            
+            curl = None
+            # You should call the following curl: "curl -H 'Accept: application/json' https://icanhazdadjoke.com/".
+            result= re.search(r'["\']((curl).*?)["\']', complete_resopnse)
+            try:
+                curl = result.group(1)
+            except:
+                curl = complete_resopnse
+            # print(curl)
+            decs = self.find_description(curl)
+            # print("Desc: ", decs)
 
-        decs = self.find_description(curl)
-        # print("Desc: ", decs)
-        
-        process = subprocess.Popen(curl, stdout=subprocess.PIPE, shell=True)
+            # put the curl and decs back to json file
+            current_url_data["curl"] = curl
+            current_url_data["description"] = decs
 
-        # Read the output of the command
-        output, _ = process.communicate()
+            with open('database/current_curl.json', "w") as json_file:
+                json.dump(current_url_data, json_file, indent=4)
+        else:
+            # user input parameter
+            arg_retriever = Arg_Retriever()
+            curl_after_fill = arg_retriever.fill_curl(conversation, current_url_data["curl"])
+            current_url_data["curl"] = curl_after_fill
+            with open('database/current_curl.json', "w") as json_file:
+                json.dump(current_url_data, json_file, indent=4)
 
-        # Print the output
-        print(output.decode('utf-8'))
 
-        return self.curl_call(output.decode('utf-8'), decs)
+        # get curl from current url
+        curl, decs = self.get_current_curl()
+
+        if self.check_missing_params(curl):
+            # ask questioner
+            questioner = Questioner()
+            ask_question = questioner.question(curl, decs)
+            return ask_question
+        else:
+            # can directly call
+            process = subprocess.Popen(curl, stdout=subprocess.PIPE, shell=True)
+
+            # Read the output of the command
+            output, _ = process.communicate()
+
+            # Print the output
+            print(output.decode('utf-8'))
+
+            if output.decode('utf-8') == '':
+                response = requests.get(curl.split(" ")[-1])
+                return response.url
+
+            return self.curl_call(output.decode('utf-8'), decs)
+    
+    def get_current_curl(self):
+        f = open('database/current_curl.json')
+        current_url_data = json.load(f)
+        return current_url_data["curl"], current_url_data["description"]
 
     def find_description(self, curl):
-        f = open('database/data_2.json')
+        f = open('database/live.json')
         data = json.load(f)
         for entry in data:
             entry_curl = entry["curl"]
@@ -66,3 +109,9 @@ class Caller:
             if entry_curl in curl or curl in entry_curl:
                 return description
         return "" 
+    
+    def check_missing_params(self, curl):
+        for c in curl:
+            if c == "{" or c == "}":
+                return True
+        return False

@@ -12,7 +12,7 @@ class RAG_GPT:
     def __init__(self):
         os.environ["OPENAI_API_KEY"] = get_openai_api_key()
         # Load KnowledgeBase from data files
-        loader = TextLoader("./database/data_2.json")
+        loader = TextLoader("./database/live.json")
         # Internal source
         self.index = VectorstoreIndexCreator().from_loaders([loader])
         # choose llm model use

@@ -50,7 +50,8 @@ def readQuery():
     # print(clist)
     user_input = clist[-1]
     caller = Caller()
-    summary = caller.process_user_request(user_input)
+    summary = caller.process_user_request(user_input, clist)
+    clist.append(summary)
     # Conversation List
     # API response summary
     data = { 
@@ -60,4 +61,6 @@ def readQuery():
     return jsonify(data)    
 
 if __name__ == '__main__':
+    importer = Import_module()
+    importer.erase_current_curl()
     app.run(host='0.0.0.0', port=105)
