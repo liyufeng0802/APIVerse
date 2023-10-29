@@ -86,25 +86,34 @@ export default function Chat(props: { apiKeyApp: string }) {
       apiKey,
     };
 
-    // -------------- Fetch --------------
-    // const response = await fetch('http://127.0.0.1:105/import', {
-    //   method: 'POST',
+// -------------- Fetch --------------
+const URL = 'https://icanhazdadjoke.com/api%23endpoints'; // Set the value of your 'URL' parameter here
+const queryString = new URLSearchParams({ URL }).toString();
+const apiUrl = `http://127.0.0.1:105/import?${queryString}`;
+
+  try {
+    // const response = await fetch(apiUrl, {
+    //   method: 'GET',
     //   headers: {
     //     'Content-Type': 'application/json',
     //   },
     //   signal: controller.signal,
-    //   body: JSON.stringify(body),
     // });
 
     // if (!response.ok) {
-    //   setLoading(false);
-    //   if (response) {
-    //     alert(
-    //       'Something went wrong went fetching from the API. Make sure to use a valid API key.',
-    //     );
-    //   }
+    //   // setLoading(false); // Uncomment this line if you have a setLoading function
+    //   alert(
+    //     'Something went wrong when fetching from the API. Make sure to use a valid API key.',
+    //   );
     //   return;
     // }
+
+    // Add your logic here to handle the successful API response
+  } catch (error) {
+    console.error('Error during the API call', error);
+    // setLoading(false); // Uncomment this line if you have a setLoading function
+  }
+
 
     //@ts-ignore
     let response = {
@@ -136,7 +145,7 @@ export default function Chat(props: { apiKeyApp: string }) {
 
     // @ts-ignore
     let summary = data['summary']
-    summary = "123981239812938129389123"
+    // summary = "123981239812938129389123"
 
     setOutputCode(summary)
 
