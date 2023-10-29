@@ -1,0 +1,58 @@
+[
+    {
+        "curl": "\"curl -X GET https://picsum.photos/200/300\"",
+        "description": " \"Get a specific size image\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/200\"",
+        "description": " \"Get a square image\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/id/237/200/300\"",
+        "description": " \"Get a specific image\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/seed/picsum/200/300\"",
+        "description": " \"Get a static random image based on seed\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/200/300?grayscale\"",
+        "description": " \"Get a grayscale image\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/200/300/?blur\"",
+        "description": " \"Get a blur image\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/200/300?grayscale&blur\"",
+        "description": " \"Get a grayscale and blurred image\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/200/300?random=1\"",
+        "description": " \"Get multiple same size images\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/200/300.jpg\"",
+        "description": " \"Get an image with .jpg extension\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/200/300.webp\"",
+        "description": " \"Get an image in the WebP format\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/v2/list\"",
+        "description": " \"Get a list of images\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/v2/list?page=2&limit=100\"",
+        "description": " \"Change the page and limit of listed images\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/id/0/info\"",
+        "description": " \"Get information about a specific image by using ID\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/seed/picsum/info\"",
+        "description": " \"Get information about a specific image by using seed\""
+    }
+]
