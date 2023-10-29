@@ -57,7 +57,7 @@ export function SidebarLinks(props: SidebarLinksProps) {
         return (
           <Accordion defaultIndex={0} allowToggle key={key}>
             <Flex w="100%" justifyContent={'space-between'}>
-              <AccordionItem isDisabled border="none" mb="14px" key={key}>
+              <AccordionItem border="none" mb="14px" key={key}>
                 <AccordionButton
                   display="flex"
                   alignItems="center"
