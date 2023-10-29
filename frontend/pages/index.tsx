@@ -116,6 +116,8 @@ export default function Chat(props: { apiKeyApp: string }) {
                 }
             });
 
+            setLoading(true);
+
             console.log("Query Sent");
 
             // Accessing the response body
@@ -127,6 +129,13 @@ export default function Chat(props: { apiKeyApp: string }) {
             let summary = data['summary'];
 
             console.log(`Here is the summary ${summary}`);
+
+            // set new chat to history
+            const newReply: ChatMessage = {type: 'received', message: summary};
+            const newHist = [...chatHistory, newReply].filter(chat => chat.message.trim() !== "");
+            console.log(`Test chat history: ${newHist}`);
+            setChatHistory(newHist);
+            setLoading(false);
 
             // Here, add your logic to handle the response as needed
             // For example, you can update the chat history, set output code, etc.
@@ -180,8 +189,8 @@ export default function Chat(props: { apiKeyApp: string }) {
         };
 
         // fetchData();
-        await fetchAPIQuery(chatHistoryToConversation(newHist));
         await setChatHistory(newHist);
+        await fetchAPIQuery(chatHistoryToConversation(newHist));
         setLoading(false);
     };
 

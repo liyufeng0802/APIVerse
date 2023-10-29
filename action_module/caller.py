@@ -47,9 +47,9 @@ class Caller:
             
             curl = None
             # You should call the following curl: "curl -H 'Accept: application/json' https://icanhazdadjoke.com/".
-            result= re.search(r'["\']((curl).*?)', complete_resopnse)
+            result= re.search(r'(^["\'](curl).*)', complete_resopnse)
             try:
-                curl = result.group(1)
+                curl = result.group(1).strip('"').strip("'")
             except:
                 curl = complete_resopnse
             print(curl)
