@@ -10,6 +10,8 @@ class Questioner:
                 Example: Please tell me what is the book's name.
                 """
 
+        #TODO: Maybe remove 'the Spaceflight News', and change 'It allows you to access the details of a single article' to 'It allows you to achieve the description'
+    
     def __init__(self):
         self.llm_model = GPT_module()
     
@@ -23,8 +25,10 @@ class Questioner:
         - description: the description of this specific API
         """
         # Format question
-        prompt = f"CRUL: {curl}\nDescription:{description}\n" + self.AFTER_PROMT
+        prompt = f"CURL: {curl}\nDescription:{description}\n" + self.AFTER_PROMT
         # Ask llm what is missing and ask for value
         response = self.llm_model.query(prompt)
         # return the question
         return response
+
+    
