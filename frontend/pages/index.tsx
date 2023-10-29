@@ -16,15 +16,18 @@ import {
   Icon,
   Image,
   Img,
-  Input,
+  Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay,
   Text,
-  useColorModeValue,
+  useColorModeValue, useDisclosure, useToast,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { MdAutoAwesome, MdBolt, MdEdit, MdPerson } from 'react-icons/md';
+import {MdAutoAwesome, MdBolt, MdEdit, MdLock, MdPerson} from 'react-icons/md';
 import Bg from '../public/img/chat/bg-image.png';
 import {response} from "express";
 import axios from 'axios';
+import Card from "@/components/card/Card";
+import APIModal from "@/components/apiModal";
+import {IRoute} from "@/types/navigation";
 
 export default function Chat(props: { apiKeyApp: string }) {
   // *** If you use .env.local variable for your API key, method which we recommend, use the apiKey variable commented below
@@ -39,11 +42,17 @@ export default function Chat(props: { apiKeyApp: string }) {
   // Loading state
   const [loading, setLoading] = useState<boolean>(false);
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [apiDocURL, setURL] = useState('');
+
   // API Key
   // const [apiKey, setApiKey] = useState<string>(apiKeyApp);
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.200');
   const inputColor = useColorModeValue('navy.700', 'white');
   const iconColor = useColorModeValue('brand.500', 'white');
+  const grayColor = useColorModeValue('gray.500', 'gray.500');
+
   const bgIcon = useColorModeValue(
     'linear-gradient(180deg, #FBFBFF 0%, #CACAFF 100%)',
     'whiteAlpha.200',
@@ -320,6 +329,7 @@ export default function Chat(props: { apiKeyApp: string }) {
           >
             Submit
           </Button>
+          <APIModal setApiKey={setURL} sidebar={true} />
         </Flex>
 
         <Flex
