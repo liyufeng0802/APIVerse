@@ -37,7 +37,7 @@ def main():
         data.append(dic)
     print("the dict is:", data)
 
-    file_path = "database/data_2.json"
+    file_path = "database/live.json"
     with open(file_path, "w") as json_file:
         json.dump(data, json_file, indent=4)"""
     importer = Import_module()

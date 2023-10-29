@@ -31,7 +31,20 @@ def main():
     # data = json_data
     # print(curl_call(data))
 
-    print(process_user_request("Get me a random joke"))
+    #print(process_user_request("Get me a random joke"))
+    url = "curl -X GET https://picsum.photos/300/200"
+
+    process = subprocess.Popen(url, stdout=subprocess.PIPE, shell=True)
+
+    # Read the output of the command
+    output, _ = process.communicate()
+
+    # Print the output
+    print(output.decode('utf-8') == '')
+
+    if output.decode('utf-8') == '':
+        response = requests.get(url.split(" ")[-1])
+        print(response.url)
 
 def process_user_request(user_request):
     router = Router()
@@ -60,7 +73,7 @@ def process_user_request(user_request):
     return caller.curl_call(output.decode('utf-8'), decs)
 
 def find_description(curl):
-    f = open('database/data_2.json')
+    f = open('database/live.json')
     data = json.load(f)
     for entry in data:
         entry_curl = entry["curl"]

@@ -1,0 +1,58 @@
+[
+    {
+        "curl": "\"curl -X GET https://picsum.photos/{width}/{height}\"",
+        "description": " \"Get a random specific size image in specifc width and height\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/{width}\"",
+        "description": " \"Get a random square image in specific width\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/id/{id}/{width}/{height}\"",
+        "description": " \"Get a specific image with id and in specifc width and height\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/seed/{seed}/{width}/{height}\"",
+        "description": " \"Get a static random image based on seed, and in specifc width and height\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/{width}/{height}?grayscale\"",
+        "description": " \"Get  a random specific size grayscale image in specifc width and height\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/{width}/{height}/?blur\"",
+        "description": " \"Get  a random specific size blur image in specifc width and height\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/{width}/{height}?grayscale&blur\"",
+        "description": " \"Get a  a random specific size grayscale and blurred image in specifc width and height\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/{width}/{height}?random=1\"",
+        "description": " \"Get multiple same size images in specifc width and height\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/{width}/{height}.jpg\"",
+        "description": " \"Get  a random specific size image with .jpg extension in specifc width and height\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/{width}/{height}.webp\"",
+        "description": " \"Get a random specific size image in the WebP format in specifc width and height\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/v2/list\"",
+        "description": " \"Get a list of images\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/v2/list?page=2&limit=100\"",
+        "description": " \"Change the page and limit of listed images\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/id/0/info\"",
+        "description": " \"Get information about a specific image by using ID\""
+    },
+    {
+        "curl": "\"curl -X GET https://picsum.photos/seed/picsum/info\"",
+        "description": " \"Get information about a specific image by using seed\""
+    }
+]
