@@ -63,7 +63,7 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
           mt="8px"
           minH="40px"
         >
-          Set API Key
+          Import APIs
         </Button>
       ) : (
         <Button
@@ -91,7 +91,7 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
               textAlign={'center'}
               color={textColor}
             >
-              Enter your API Key for Current API
+              Import available APIs by providing url to API Documentation
             </ModalHeader>
             <ModalCloseButton _focus={{ boxShadow: 'none' }} />
             <ModalBody p="0px">
@@ -102,9 +102,9 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
                 lineHeight="28px"
                 mb="22px"
               >
-                You need an OpenAI API Key to use Horizon AI Template's
-                features. Your API Key is stored locally on your browser and
-                never sent anywhere else.
+                Our LLM streamlines the API understanding process
+                by automatically analyzing the content on the documentation
+                and extract the the available APIs.
               </Text>
               <Flex mb="20px">
                 <Input
@@ -119,7 +119,7 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
                   _focus={{ borderColor: 'none' }}
                   _placeholder={{ color: 'gray.500' }}
                   color={inputColor}
-                  placeholder="your api key"
+                  placeholder="url to the documentation"
                   onChange={handleChange}
                   value={inputCode}
                 />
@@ -134,20 +134,20 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
                   w={{ base: '300px', md: '180px' }}
                   h="54px"
                   onClick={() => {
-                    inputCode?.includes('sk-')
+                    inputCode?.includes('http')
                       ? handleApiKeyChange(inputCode)
                       : null;
                     if (inputCode)
                       toast({
-                        title: inputCode?.includes('sk-')
-                          ? `Success! You have successfully added your API key!`
-                          : !inputCode?.includes('sk-')
-                          ? `Invalid API key. Please make sure your API key is still working properly.`
-                          : 'Please add your API key!',
+                        title: inputCode?.includes('http')
+                          ? `Success! You have upload the url`
+                          : !inputCode?.includes('http')
+                          ? `Error! You have not upload valid url`
+                          : 'Cannot be empty',
                         position: 'top',
-                        status: inputCode?.includes('sk-')
+                        status: inputCode?.includes('http')
                           ? 'success'
-                          : !inputCode?.includes('sk-')
+                          : !inputCode?.includes('http')
                           ? `error`
                           : !inputCode
                           ? 'warning'
@@ -156,7 +156,7 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
                       });
                   }}
                 >
-                  Save API Key
+                  Import
                 </Button>
               </Flex>
             </ModalBody>
