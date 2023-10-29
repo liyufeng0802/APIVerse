@@ -34,8 +34,10 @@ def importNewDocument():
 @app.route('/query', methods=['POST'])
 def readQuery():
     # input conversation []
-    args = request.args
-    clist = args.get("conversation")
+    j = request.json
+    print(j)
+    clist = j["conversation"]
+    print(clist)
     user_input = clist[-1]
     summary = process_user_request(user_input)
     # Conversation List
@@ -54,7 +56,7 @@ def process_user_request(user_request):
     print(complete_resopnse)
     
     # You should call the following curl: "curl -H 'Accept: application/json' https://icanhazdadjoke.com/".
-    result= re.search(r'"((curl).*?)"', complete_resopnse)
+    result= re.search(r'["\']((curl).*?)["\']', complete_resopnse)
     curl = result.group(1)
     print(curl)
 
