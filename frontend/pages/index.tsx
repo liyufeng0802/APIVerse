@@ -107,6 +107,7 @@ export default function Chat(props: { apiKeyApp: string }) {
             if (conversation.length === 0) {
                 return;
             }
+            console.log(`Final sent convesation ${conversation}`);
             const response = await axios.post('http://127.0.0.1:105/query', {
                 conversation: conversation
             }, {
@@ -125,7 +126,7 @@ export default function Chat(props: { apiKeyApp: string }) {
 
             let summary = data['summary'];
 
-            console.log(summary);
+            console.log(`Here is the summary ${summary}`);
 
             // Here, add your logic to handle the response as needed
             // For example, you can update the chat history, set output code, etc.
@@ -141,6 +142,7 @@ export default function Chat(props: { apiKeyApp: string }) {
         for (let i = 0; i < chatHistory.length; i++) {
             conversation.push(chatHistory[i].message);
         }
+        console.log(`Conversation transformed: ${conversation}`);
         return conversation;
     }
 
@@ -164,7 +166,9 @@ export default function Chat(props: { apiKeyApp: string }) {
         }
 
         const newChat: ChatMessage = {type: 'sent', message: inputCode};
-        setChatHistory((prevChats) => [...prevChats, newChat].filter(chat => chat.message.trim() !== ""));
+        console.log(`Test new inserted question: ${newChat.message}`);
+        let newHist = [...chatHistory, newChat].filter(chat => chat.message.trim() !== "");
+        console.log(`Test chat history: ${newHist}`);
 
         setOutputCode(' ');
         setLoading(true);
@@ -176,7 +180,8 @@ export default function Chat(props: { apiKeyApp: string }) {
         };
 
         // fetchData();
-        await fetchAPIQuery(chatHistoryToConversation(chatHistory));
+        await fetchAPIQuery(chatHistoryToConversation(newHist));
+        await setChatHistory(newHist);
         setLoading(false);
     };
 

@@ -19,7 +19,7 @@ class Router:
         - description: the description of this specific API
         """
         # Ask llm what is this intent want to call which API
-        prompt = f"Base on this user intent {user_intent}, what crul I should call?"
+        prompt = f"""Base on this user intent {user_intent}, what crul I should call? Only give me a single curl command with good format, be consistent with quotation usage, e.g.  "curl -H 'Accept: application/json' https://icanhazdadjoke.com/" e.g. avoid other special characters."""
         llm_model = RAG_GPT()
         response = llm_model.query(prompt)
         # return the RAW format CURL, and its description

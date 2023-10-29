@@ -1,4 +1,4 @@
 {
-    "curl": "curl -H ",
-    "description": " 'This API endpoint fetches a random dad joke in JSON format'"
+    "curl": null,
+    "description": null
 }

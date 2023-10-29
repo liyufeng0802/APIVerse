@@ -43,16 +43,16 @@ class Caller:
             router = Router()
 
             complete_resopnse = router.detector(user_request)
-            print(complete_resopnse)
+            print("complete_resopnse: ", complete_resopnse, "\nTHE END OF")
             
             curl = None
             # You should call the following curl: "curl -H 'Accept: application/json' https://icanhazdadjoke.com/".
-            result= re.search(r'["\']((curl).*?)["\']', complete_resopnse)
+            result= re.search(r'["\']((curl).*?)', complete_resopnse)
             try:
                 curl = result.group(1)
             except:
                 curl = complete_resopnse
-            # print(curl)
+            print(curl)
             decs = self.find_description(curl)
             # print("Desc: ", decs)
 
