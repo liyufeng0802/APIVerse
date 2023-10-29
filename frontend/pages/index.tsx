@@ -46,6 +46,18 @@ export default function Chat(props: { apiKeyApp: string }) {
 
   const [apiDocURL, setURL] = useState('');
 
+  useEffect(() => {
+    if (apiDocURL === '') {
+      return;
+    }
+    const msg = `Import documentation from ${apiDocURL}`;
+    console.log(msg);
+    setInputCode(msg);
+    console.log(`Test: ${inputCode}`);
+    handleTranslate();
+  }, [apiDocURL]); // The second argument is an array of dependencies
+
+
   // API Key
   // const [apiKey, setApiKey] = useState<string>(apiKeyApp);
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.200');
