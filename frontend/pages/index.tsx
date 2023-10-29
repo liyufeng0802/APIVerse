@@ -23,6 +23,7 @@ import {
 import { useEffect, useState } from 'react';
 import { MdAutoAwesome, MdBolt, MdEdit, MdPerson } from 'react-icons/md';
 import Bg from '../public/img/chat/bg-image.png';
+import {response} from "express";
 
 export default function Chat(props: { apiKeyApp: string }) {
   // *** If you use .env.local variable for your API key, method which we recommend, use the apiKey variable commented below
@@ -65,11 +66,6 @@ export default function Chat(props: { apiKeyApp: string }) {
     // Chat post conditions(maximum number of characters, valid message etc.)
     const maxCodeLength = model === 'gpt-3.5-turbo' ? 700 : 700;
 
-    if (!apiKeyApp?.includes('sk-') && !apiKey?.includes('sk-')) {
-      alert('Please enter an API key.');
-      return;
-    }
-
     if (!inputCode) {
       alert('Please enter your message.');
       return;
@@ -91,44 +87,58 @@ export default function Chat(props: { apiKeyApp: string }) {
     };
 
     // -------------- Fetch --------------
-    const response = await fetch('/api/chatAPI', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      signal: controller.signal,
-      body: JSON.stringify(body),
-    });
+    // const response = await fetch('http://127.0.0.1:105/import', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   signal: controller.signal,
+    //   body: JSON.stringify(body),
+    // });
 
-    if (!response.ok) {
-      setLoading(false);
-      if (response) {
-        alert(
-          'Something went wrong went fetching from the API. Make sure to use a valid API key.',
-        );
-      }
-      return;
+    // if (!response.ok) {
+    //   setLoading(false);
+    //   if (response) {
+    //     alert(
+    //       'Something went wrong went fetching from the API. Make sure to use a valid API key.',
+    //     );
+    //   }
+    //   return;
+    // }
+
+    //@ts-ignore
+    let response = {
+        body: {
+            summary: "123981239812938129389123"
+        }
     }
 
+    //@ts-ignore
     const data = response.body;
 
-    if (!data) {
-      setLoading(false);
-      alert('Something went wrong');
-      return;
-    }
+    // if (!data) {
+    //   setLoading(false);
+    //   alert('Something went wrong');
+    //   return;
+    // }
 
-    const reader = data.getReader();
-    const decoder = new TextDecoder();
-    let done = false;
+    // const reader = data.getReader();
+    // const decoder = new TextDecoder();
+    // let done = false;
 
-    while (!done) {
-      setLoading(true);
-      const { value, done: doneReading } = await reader.read();
-      done = doneReading;
-      const chunkValue = decoder.decode(value);
-      setOutputCode((prevCode) => prevCode + chunkValue);
-    }
+    // while (!done) {
+    //   setLoading(true);
+    //   const { value, done: doneReading } = await reader.read();
+    //   done = doneReading;
+    //   const chunkValue = decoder.decode(value);
+    //   setOutputCode((prevCode) => prevCode + chunkValue);
+    // }
+
+    // @ts-ignore
+    let summary = data['summary']
+    summary = "123981239812938129389123"
+
+    setOutputCode(summary)
 
     setLoading(false);
   };
