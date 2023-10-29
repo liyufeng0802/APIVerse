@@ -4,8 +4,8 @@
 import MessageBoxChat from '@/components/MessageBox';
 import {ChatBody, OpenAIModel} from '@/types/types';
 import {Button, Flex, Icon, Img, Input, Text, useColorModeValue, useDisclosure,} from '@chakra-ui/react';
-import {useCallback, useEffect, useRef, useState} from 'react';
-import {MdAutoAwesome, MdEdit, MdPerson} from 'react-icons/md';
+import {useEffect, useRef, useState} from 'react';
+import {MdAutoAwesome, MdPerson} from 'react-icons/md';
 import Bg from '../public/img/chat/bg-image.png';
 import axios from 'axios';
 import APIModal from "@/components/apiModal";
@@ -60,6 +60,7 @@ export default function Chat(props: { apiKeyApp: string }) {
 
     async function fetchAPIImport() {
         try {
+            setLoading(true);
             const response = await axios.get('http://127.0.0.1:105/import', {
                 params: {"url": 'https://icanhazdadjoke.com/api#endpoints'},
                 headers: {
@@ -101,6 +102,48 @@ export default function Chat(props: { apiKeyApp: string }) {
         }
     }
 
+    async function fetchAPIQuery(conversation: string[]) {
+        try {
+            if (conversation.length === 0) {
+                return;
+            }
+            const response = await axios.post('http://127.0.0.1:105/query', {
+                conversation: conversation
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            console.log("Query Sent");
+
+            // Accessing the response body
+            let data = response.data;
+
+            console.log("Response Received");
+            console.log(data);
+
+            let summary = data['summary'];
+
+            console.log(summary);
+
+            // Here, add your logic to handle the response as needed
+            // For example, you can update the chat history, set output code, etc.
+
+        } catch (error) {
+            console.error('Error fetching data: ', error);
+            alert('Something went wrong when fetching from the API. Please check the console for more details.');
+        }
+    }
+
+    function chatHistoryToConversation(chatHistory: ChatHistory): string[] {
+        let conversation: string[] = [];
+        for (let i = 0; i < chatHistory.length; i++) {
+            conversation.push(chatHistory[i].message);
+        }
+        return conversation;
+    }
+
     const handleTranslate = async () => {
         const apiKey = apiKeyApp;
         setInputOnSubmit(inputCode);
@@ -120,6 +163,8 @@ export default function Chat(props: { apiKeyApp: string }) {
             return;
         }
 
+        const newChat: ChatMessage = {type: 'sent', message: inputCode};
+        setChatHistory((prevChats) => [...prevChats, newChat].filter(chat => chat.message.trim() !== ""));
 
         setOutputCode(' ');
         setLoading(true);
@@ -131,6 +176,7 @@ export default function Chat(props: { apiKeyApp: string }) {
         };
 
         // fetchData();
+        await fetchAPIQuery(chatHistoryToConversation(chatHistory));
         setLoading(false);
     };
 

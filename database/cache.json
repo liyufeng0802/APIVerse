@@ -97,6 +97,47 @@
                     "description": " 'search for dad jokes with specified term in JSON response'"
                 }
             ]
+        },
+        {
+            "url": "https://icanhazdadjoke.com/api#endpoints",
+            "json": [
+                {
+                    "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/'",
+                    "description": " 'This API endpoint fetches a random dad joke in JSON format'"
+                },
+                {
+                    "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/'",
+                    "description": " 'This API endpoint fetches a random dad joke in plain text format'"
+                },
+                {
+                    "curl": "'curl https://icanhazdadjoke.com/slack'",
+                    "description": " 'This API endpoint fetches a random dad joke formatted for Slack'"
+                },
+                {
+                    "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/j/<joke_id>'",
+                    "description": " 'This API endpoint fetches a specific dad joke in JSON format given an id'"
+                },
+                {
+                    "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/j/<joke_id>'",
+                    "description": " 'This API endpoint fetches a specific dad joke in plain text format given an id'"
+                },
+                {
+                    "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/search'",
+                    "description": " 'This API endpoint returns search results for dad jokes in JSON format'"
+                },
+                {
+                    "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/search'",
+                    "description": " 'This API endpoint returns search results for dad jokes in plain text format'"
+                },
+                {
+                    "curl": "'curl -H \"Accept: application/json\" \"https://icanhazdadjoke.com/search?term=hipster\"'",
+                    "description": " 'This API endpoint searches through dad jokes with a search term and returns results in JSON format'"
+                },
+                {
+                    "curl": "'curl -X POST -d \\'{\"query\": \"query { joke {id joke permalink } }\"}\\' -H \"Content-Type: application/json\" https://icanhazdadjoke.com/graphql'",
+                    "description": " 'This API endpoint queries for a dad joke using GraphQL'"
+                }
+            ]
         }
     ]
 }

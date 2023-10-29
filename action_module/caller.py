@@ -74,6 +74,8 @@ class Caller:
         # get curl from current url
         curl, decs = self.get_current_curl()
 
+        print("curl: ", curl)
+
         if self.check_missing_params(curl):
             # ask questioner
             questioner = Questioner()
