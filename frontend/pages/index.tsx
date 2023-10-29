@@ -24,6 +24,7 @@ import { useEffect, useState } from 'react';
 import { MdAutoAwesome, MdBolt, MdEdit, MdPerson } from 'react-icons/md';
 import Bg from '../public/img/chat/bg-image.png';
 import {response} from "express";
+import axios from 'axios';
 
 export default function Chat(props: { apiKeyApp: string }) {
   // *** If you use .env.local variable for your API key, method which we recommend, use the apiKey variable commented below
@@ -86,44 +87,52 @@ export default function Chat(props: { apiKeyApp: string }) {
       apiKey,
     };
 
-// -------------- Fetch --------------
-const URL = 'https://icanhazdadjoke.com/api%23endpoints'; // Set the value of your 'URL' parameter here
-const queryString = new URLSearchParams({ URL }).toString();
-const apiUrl = `http://127.0.0.1:105/import?${queryString}`;
+    let data = ""
 
-  try {
-    // const response = await fetch(apiUrl, {
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   signal: controller.signal,
-    // });
+    async function fetchData() {
+      try {
+        const response = await axios.get('http://127.0.0.1:105/import', {
+          params: { "url": 'https://icanhazdadjoke.com/api#endpoints' },
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
-    // if (!response.ok) {
-    //   // setLoading(false); // Uncomment this line if you have a setLoading function
-    //   alert(
-    //     'Something went wrong when fetching from the API. Make sure to use a valid API key.',
-    //   );
-    //   return;
-    // }
+        console.log("test0")
 
-    // Add your logic here to handle the successful API response
-  } catch (error) {
-    console.error('Error during the API call', error);
-    // setLoading(false); // Uncomment this line if you have a setLoading function
-  }
+        // Accessing the response body
+        data = response.data;
 
+        // Now you can use responseBody as needed
+        console.log("123test")
+        console.log(data);
 
-    //@ts-ignore
-    let response = {
-        body: {
-            summary: "123981239812938129389123"
-        }
+            // @ts-ignore
+        let summary = data['summary']
+        // summary = "123981239812938129389123"
+
+        console.log(summary)
+
+        setOutputCode(summary)
+
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+        alert('Something went wrong when fetching from the API. Make sure to use a valid API key.');
+      }
     }
 
+    fetchData();
+
     //@ts-ignore
-    const data = response.body;
+    // let response = {
+    //     body: {
+    //         summary: "123981239812938129389123"
+    //     }
+    // }
+
+    //@ts-ignore
+
 
     // if (!data) {
     //   setLoading(false);
@@ -142,14 +151,6 @@ const apiUrl = `http://127.0.0.1:105/import?${queryString}`;
     //   const chunkValue = decoder.decode(value);
     //   setOutputCode((prevCode) => prevCode + chunkValue);
     // }
-
-    // @ts-ignore
-    let summary = data['summary']
-    // summary = "123981239812938129389123"
-
-    setOutputCode(summary)
-
-    setLoading(false);
   };
   // -------------- Copy Response --------------
   // const copyToClipboard = (text: string) => {
