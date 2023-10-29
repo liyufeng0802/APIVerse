@@ -58,7 +58,7 @@ export default function Chat(props: { apiKeyApp: string }) {
     }, [apiDocURL]);
 
 
-    async function fetchData() {
+    async function fetchAPIImport() {
         try {
             const response = await axios.get('http://127.0.0.1:105/import', {
                 params: {"url": 'https://icanhazdadjoke.com/api#endpoints'},
@@ -281,7 +281,7 @@ export default function Chat(props: { apiKeyApp: string }) {
                     >
                         Submit
                     </Button>
-                    <APIModal setApiKey={setURL} sidebar={true} func_2_call={fetchData}/>
+                    <APIModal setApiKey={setURL} sidebar={true} func_2_call={fetchAPIImport}/>
                 </Flex>
 
                 <Flex
