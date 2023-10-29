@@ -37,7 +37,7 @@ export default function Footer() {
         {' '}
         &copy; {new Date().getFullYear()}
         <Text as="span" fontWeight="500" ms="4px">
-          Horizon UI AI Template. All Rights Reserved.
+          APIVerse. All Rights Reserved. 
         </Text>
       </Text>
       <List display="flex">

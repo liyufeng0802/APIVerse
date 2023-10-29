@@ -82,7 +82,7 @@ function SidebarContent(props: SidebarContent) {
       >
         <NextAvatar h="34px" w="34px" src={avatar4} me="10px" />
         <Text color={textColor} fontSize="xs" fontWeight="600" me="10px">
-          Adela Parkson
+          Oski
         </Text>
         <Menu>
           <MenuButton
@@ -144,7 +144,7 @@ function SidebarContent(props: SidebarContent) {
                 <Link
                   ms="auto"
                   isExternal
-                  href="https://horizon-ui.com/ai-template"
+                  href="https://apiverse.com"
                 >
                 </Link>
               </Flex>
@@ -165,7 +165,7 @@ function SidebarContent(props: SidebarContent) {
                 <Link
                   ms="auto"
                   isExternal
-                  href="https://horizon-ui.com/ai-template"
+                  href="https://apiverse.com"
                 >
                 </Link>
               </Flex>
@@ -186,7 +186,7 @@ function SidebarContent(props: SidebarContent) {
                 <Link
                   ms="auto"
                   isExternal
-                  href="https://horizon-ui.com/ai-template"
+                  href="https://apiverse.com"
                 >
                 </Link>
               </Flex>
@@ -207,7 +207,7 @@ function SidebarContent(props: SidebarContent) {
                 <Link
                   ms="auto"
                   isExternal
-                  href="https://horizon-ui.com/ai-template"
+                  href="https://apiverse.com"
                 >
                 </Link>
               </Flex>
