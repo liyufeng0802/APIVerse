@@ -106,7 +106,6 @@ export function SidebarLinks(props: SidebarLinksProps) {
                             {route.icon}
                           </Box>
                           <Text
-                            cursor="not-allowed"
                             me="auto"
                             color={
                               route.disabled
@@ -135,7 +134,6 @@ export function SidebarLinks(props: SidebarLinksProps) {
                         ps="32px"
                       >
                         <Text
-                          cursor="not-allowed"
                           me="auto"
                           fontWeight="500"
                           letterSpacing="0px"
@@ -165,20 +163,8 @@ export function SidebarLinks(props: SidebarLinksProps) {
               </AccordionItem>
               <Link
                 isExternal
-                href="https://horizon-ui.com/ai-template"
                 mt="6px"
               >
-                <Badge
-                  display={{ base: 'flex', lg: 'none', xl: 'flex' }}
-                  colorScheme="brand"
-                  borderRadius="25px"
-                  color="brand.500"
-                  textTransform={'none'}
-                  letterSpacing="0px"
-                  px="8px"
-                >
-                  PRO
-                </Badge>
               </Link>
             </Flex>
           </Accordion>
@@ -250,7 +236,6 @@ export function SidebarLinks(props: SidebarLinksProps) {
                       w="100%"
                       alignItems="center"
                       justifyContent="center"
-                      cursor="not-allowed"
                     >
                       <Box
                         opacity="0.4"
@@ -284,26 +269,14 @@ export function SidebarLinks(props: SidebarLinksProps) {
                       </Text>
                       <Link
                         isExternal
-                        href="https://horizon-ui.com/ai-template"
                       >
-                        <Badge
-                          display={{ base: 'flex', lg: 'none', xl: 'flex' }}
-                          colorScheme="brand"
-                          borderRadius="25px"
-                          color="brand.500"
-                          textTransform={'none'}
-                          letterSpacing="0px"
-                          px="8px"
-                        >
-                          PRO
-                        </Badge>
                       </Link>
                     </Flex>
                   )}
                 </HStack>
               </Flex>
             ) : (
-              <ListItem ms={0} cursor="not-allowed" opacity={'0.4'}>
+              <ListItem ms={0} opacity={'0.4'}>
                 <Flex ps="32px" alignItems="center" mb="8px">
                   <Text
                     color={
@@ -336,7 +309,6 @@ export function SidebarLinks(props: SidebarLinksProps) {
           alignItems="center"
           mb="10px"
           key={key}
-          cursor="not-allowed"
         >
           <Icon
             w="6px"

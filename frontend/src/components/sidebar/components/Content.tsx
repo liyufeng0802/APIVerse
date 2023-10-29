@@ -126,7 +126,7 @@ function SidebarContent(props: SidebarContent) {
             bg={bgColor}
           >
             <Box mb="30px">
-              <Flex align="center" w="100%" cursor={'not-allowed'}>
+              <Flex align="center" w="100%">
                 <Icon
                   as={MdOutlineManageAccounts}
                   width="24px"
@@ -152,7 +152,7 @@ function SidebarContent(props: SidebarContent) {
               </Flex>
             </Box>
             <Box mb="30px">
-              <Flex cursor={'not-allowed'} align="center">
+              <Flex align="center">
                 <Icon
                   as={LuHistory}
                   width="24px"
@@ -173,7 +173,7 @@ function SidebarContent(props: SidebarContent) {
               </Flex>
             </Box>
             <Box mb="30px">
-              <Flex cursor={'not-allowed'} align="center">
+              <Flex align="center">
                 <Icon
                   as={RoundedChart}
                   width="24px"
@@ -194,7 +194,7 @@ function SidebarContent(props: SidebarContent) {
               </Flex>
             </Box>
             <Box>
-              <Flex cursor={'not-allowed'} align="center">
+              <Flex align="center">
                 <Icon
                   as={IoMdPerson}
                   width="24px"
