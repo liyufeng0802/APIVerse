@@ -28,7 +28,7 @@ import {
 import { useState } from 'react';
 import { MdLock } from 'react-icons/md';
 
-function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
+function APIModal(props: { setApiKey: any; sidebar?: boolean, func_2_call?: any }) {
   const { setApiKey, sidebar } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [inputCode, setInputCode] = useState<string>('');
@@ -137,7 +137,7 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
                     inputCode?.includes('http')
                       ? handleApiKeyChange(inputCode)
                       : null;
-                    if (inputCode)
+                    if (inputCode) {
                       toast({
                         title: inputCode?.includes('http')
                           ? `Success! You have upload the url`
@@ -154,6 +154,15 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
                           : 'error',
                         isClosable: true,
                       });
+                                    //  if status success, then call func_2_call
+                      if (inputCode && inputCode.includes('http') && props.func_2_call) {
+                        console.log('calling func_2_call');
+                        console.log(inputCode);
+                        props.func_2_call();
+                      }
+
+                      setInputCode('')
+                    }
                   }}
                 >
                   Import
