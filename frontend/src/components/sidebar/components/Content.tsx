@@ -148,17 +148,6 @@ function SidebarContent(props: SidebarContent) {
                   isExternal
                   href="https://horizon-ui.com/ai-template"
                 >
-                  <Badge
-                    display={{ base: 'flex', lg: 'none', xl: 'flex' }}
-                    colorScheme="brand"
-                    borderRadius="25px"
-                    color="brand.500"
-                    textTransform={'none'}
-                    letterSpacing="0px"
-                    px="8px"
-                  >
-                    PRO
-                  </Badge>
                 </Link>
               </Flex>
             </Box>
@@ -180,17 +169,6 @@ function SidebarContent(props: SidebarContent) {
                   isExternal
                   href="https://horizon-ui.com/ai-template"
                 >
-                  <Badge
-                    display={{ base: 'flex', lg: 'none', xl: 'flex' }}
-                    colorScheme="brand"
-                    borderRadius="25px"
-                    color="brand.500"
-                    textTransform={'none'}
-                    letterSpacing="0px"
-                    px="8px"
-                  >
-                    PRO
-                  </Badge>
                 </Link>
               </Flex>
             </Box>
@@ -212,17 +190,6 @@ function SidebarContent(props: SidebarContent) {
                   isExternal
                   href="https://horizon-ui.com/ai-template"
                 >
-                  <Badge
-                    display={{ base: 'flex', lg: 'none', xl: 'flex' }}
-                    colorScheme="brand"
-                    borderRadius="25px"
-                    color="brand.500"
-                    textTransform={'none'}
-                    letterSpacing="0px"
-                    px="8px"
-                  >
-                    PRO
-                  </Badge>
                 </Link>
               </Flex>
             </Box>
@@ -244,17 +211,6 @@ function SidebarContent(props: SidebarContent) {
                   isExternal
                   href="https://horizon-ui.com/ai-template"
                 >
-                  <Badge
-                    display={{ base: 'flex', lg: 'none', xl: 'flex' }}
-                    colorScheme="brand"
-                    borderRadius="25px"
-                    color="brand.500"
-                    textTransform={'none'}
-                    letterSpacing="0px"
-                    px="8px"
-                  >
-                    PRO
-                  </Badge>
                 </Link>
               </Flex>
             </Box>
