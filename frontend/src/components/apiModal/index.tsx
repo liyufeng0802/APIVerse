@@ -162,6 +162,7 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean, func_2_call?: any 
                       }
 
                       setInputCode('')
+                      onClose();
                     }
                   }}
                 >

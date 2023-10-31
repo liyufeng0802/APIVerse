@@ -1,4 +1,4 @@
 {
-    "curl": "You should call the following curl command:\n\ncurl -H \"Accept: application/json\" https://icanhazdadjoke.com/",
-    "description": ""
+    "curl": null,
+    "description": null
 }

@@ -13,12 +13,12 @@ def importNewDocument():
     args = request.args
     url = args.get("url")
     print(f"importing url: {url}")
-    importer = Import_module()
+    importer = Import_module()  
     importer.addNewURL(url)
-    jsonResponse = importer.get_jsonResponse()
+    jsonResponse, summary = importer.get_Response()
     data = {
             "listData" : jsonResponse,
-            "summary" : importer.get_summary(),
+            "summary" : summary,
         }
     # data = {
     #     "listData" : [

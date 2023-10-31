@@ -10,6 +10,7 @@ class Import_module:
     def __init__(self):
         self.erase_current_curl()
         self.data = []
+        self.summary = ""
     
 
     def addNewURL(self, url):
@@ -38,6 +39,7 @@ class Import_module:
         curl_list = re.findall(regex, curl_requests)
         # print("the list: ", curl_list)
         self.saveCurlList(curl_list)
+        self.get_summary()
         self.caching(url)
     
     def saveCurlList(self, curl_list):
@@ -62,10 +64,11 @@ class Import_module:
         prompt = f"Given a list of descriptions of each API, a human can help the user call the corresponding API. Write me a summary descript in first person of what the user can ask me to do. \nPlease list all the questions users can ask me.\n(Avoid using technical words, such as \"Fetch\", \"Retrieve\", \"Load\" and so on)\n{description_list}"
         model = GPT_module()
         response = model.query(prompt)
-        return response
+        self.summary = response
+        # return self.summary
     
-    def get_jsonResponse(self):
-        return self.data
+    def get_Response(self):
+        return self.data, self.summary
 
     def caching(self, url):
         cache_path = "database/cache.json"
@@ -75,7 +78,7 @@ class Import_module:
             existing_data = json.load(file)
 
         # Modify the data (append a new item to a list, for example)
-        new_item = {"url": url, "json": self.data}
+        new_item = {"url": url, "json": self.data, "summary": self.summary}
         existing_data["items"].append(new_item)
 
         with open(cache_path, 'w') as file:
@@ -94,6 +97,7 @@ class Import_module:
                 hit = True
 
                 self.data = item["json"]
+                self.summary = item["summary"]
                 file_path = "database/live.json"
                 with open(file_path, "w") as json_file:
                     json.dump(self.data, json_file, indent=4)

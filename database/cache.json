@@ -1,143 +1,42 @@
 {
     "items": [
         {
-            "url": "https://picsum.photos/",
-            "json": [
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/{width}/{height}\"",
-                    "description": " \"Get a random specific size image in specifc width and height\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/{width}\"",
-                    "description": " \"Get a random square image in specific width\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/id/{id}/{width}/{height}\"",
-                    "description": " \"Get a specific image with id and in specifc width and height\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/seed/{seed}/{width}/{height}\"",
-                    "description": " \"Get a static random image based on seed, and in specifc width and height\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/{width}/{height}?grayscale\"",
-                    "description": " \"Get  a random specific size grayscale image in specifc width and height\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/{width}/{height}/?blur\"",
-                    "description": " \"Get  a random specific size blur image in specifc width and height\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/{width}/{height}?grayscale&blur\"",
-                    "description": " \"Get a  a random specific size grayscale and blurred image in specifc width and height\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/{width}/{height}?random=1\"",
-                    "description": " \"Get multiple same size images in specifc width and height\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/{width}/{height}.jpg\"",
-                    "description": " \"Get  a random specific size image with .jpg extension in specifc width and height\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/{width}/{height}.webp\"",
-                    "description": " \"Get a random specific size image in the WebP format in specifc width and height\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/v2/list\"",
-                    "description": " \"Get a list of images\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/v2/list?page=2&limit=100\"",
-                    "description": " \"Change the page and limit of listed images\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/id/0/info\"",
-                    "description": " \"Get information about a specific image by using ID\""
-                },
-                {
-                    "curl": "\"curl -X GET https://picsum.photos/seed/picsum/info\"",
-                    "description": " \"Get information about a specific image by using seed\""
-                }
-            ]
-        },
-        {
-            "url": "https://icanhazdadjoke.com/api",
-            "json": [
-                {
-                    "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/'",
-                    "description": " 'fetch a random dad joke with a JSON response'"
-                },
-                {
-                    "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/'",
-                    "description": " 'fetch a random dad joke with a plain text response'"
-                },
-                {
-                    "curl": "'curl https://icanhazdadjoke.com/slack'",
-                    "description": " 'fetch random dad joke formatted for Slack'"
-                },
-                {
-                    "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/j'",
-                    "description": " 'fetch a specific dad joke with a JSON response (joke_id required)'"
-                },
-                {
-                    "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/j'",
-                    "description": " 'fetch a specific dad joke with a plain text response (joke_id required)'"
-                },
-                {
-                    "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/search'",
-                    "description": " 'search for dad jokes with a JSON response'"
-                },
-                {
-                    "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/search'",
-                    "description": " 'search for dad jokes with a plain text response'"
-                },
-                {
-                    "curl": "'curl -H \"Accept: application/json\" \"https://icanhazdadjoke.com/search?term=hipster\"'",
-                    "description": " 'search for dad jokes with specified term in JSON response'"
-                }
-            ]
-        },
-        {
             "url": "https://icanhazdadjoke.com/api#endpoints",
             "json": [
                 {
                     "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/'",
-                    "description": " 'This API endpoint fetches a random dad joke in JSON format'"
+                    "description": " 'Fetch a random dad joke in json format'"
                 },
                 {
                     "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/'",
-                    "description": " 'This API endpoint fetches a random dad joke in plain text format'"
+                    "description": " ' Fetch a random dad joke in text format'"
                 },
                 {
                     "curl": "'curl https://icanhazdadjoke.com/slack'",
-                    "description": " 'This API endpoint fetches a random dad joke formatted for Slack'"
+                    "description": " 'Fetch a random dad joke formatted for Slack'"
                 },
                 {
-                    "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/j/<joke_id>'",
-                    "description": " 'This API endpoint fetches a specific dad joke in JSON format given an id'"
+                    "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/j/{joke_id}'",
+                    "description": " 'Fetch a specific dad joke in json format using joke id'"
                 },
                 {
-                    "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/j/<joke_id>'",
-                    "description": " 'This API endpoint fetches a specific dad joke in plain text format given an id'"
+                    "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/j/{joke_id}'",
+                    "description": " 'Fetch a specific dad joke in text format using joke id'"
                 },
                 {
                     "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/search'",
-                    "description": " 'This API endpoint returns search results for dad jokes in JSON format'"
+                    "description": " 'Search for dad jokes in json format'"
                 },
                 {
                     "curl": "'curl -H \"Accept: text/plain\" https://icanhazdadjoke.com/search'",
-                    "description": " 'This API endpoint returns search results for dad jokes in plain text format'"
+                    "description": " 'Search for dad jokes in text format'"
                 },
                 {
-                    "curl": "'curl -H \"Accept: application/json\" \"https://icanhazdadjoke.com/search?term=hipster\"'",
-                    "description": " 'This API endpoint searches through dad jokes with a search term and returns results in JSON format'"
-                },
-                {
-                    "curl": "'curl -X POST -d \\'{\"query\": \"query { joke {id joke permalink } }\"}\\' -H \"Content-Type: application/json\" https://icanhazdadjoke.com/graphql'",
-                    "description": " 'This API endpoint queries for a dad joke using GraphQL'"
+                    "curl": "'curl -H \"Accept: application/json\" https://icanhazdadjoke.com/search?term={search_term}'",
+                    "description": " 'Search for dad jokes using a search term'"
                 }
-            ]
+            ],
+            "summary": "As an AI, I'm here to help you interact with a fun and entertaining section of the internet - dad jokes! Here are some of the things you can ask me to do:\n\n1. \"Could you tell me a random dad joke?\" - I can serve it to you as simple text or in a more structured format.\n2. \"Could you share a random dad joke suitable for Slack?\" - Evidently, I have the ability to tailor my answer to fit different platforms, like Slack!\n3. \"Can I hear a specific dad joke if I give you its ID?\" - Of course! Just give me the ID and I can provide you with the joke either as text or in a structured format.\n4. \"Could you help me find a selection of dad jokes?\" - I can show you an array of dad jokes, either as simple text or in a json format.\n5. \"How about finding a dad joke with a specific theme or keyword?\" - That's quite doable! Just tell me the term you wish to search for.\n\nJust ask and enjoy the dad joke extravaganza!"
         }
     ]
 }
