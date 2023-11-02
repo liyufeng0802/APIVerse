@@ -4,7 +4,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import DirectoryLoader, TextLoader
 from langchain.indexes import VectorstoreIndexCreator
 
-from util import get_openai_api_key
+from gpt_module import get_openai_api_key
 
 class RAG_GPT:
     MODEL_NAME = "gpt-4"

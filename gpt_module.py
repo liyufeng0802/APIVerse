@@ -1,5 +1,6 @@
+import os
+import yaml
 import openai
-from util import get_openai_api_key
 
 class GPT_module:
     MODEL_NAME = "gpt-4"
@@ -46,3 +47,13 @@ class GPT_module:
         conversation.append({"role": "assistant", "content": response["choices"][0]["message"]['content']})
         response_message = response["choices"][0]["message"]
         return response_message, conversation
+
+# Read OpenAI key from ~/.cal_hack/config.yaml
+def get_openai_api_key():
+    with open(os.path.expanduser("~/.cal_hack/config.yaml"), "r") as f:
+        config = yaml.load(f, Loader=yaml.SafeLoader)
+        if "openai_api_key" not in config:
+            raise Exception("OpenAI API key not found in ~/.cal_hack/config.yaml,"
+                            " please add 'openai_api_key: YOUR_KEY' in the file.")
+        openai_api_key = config["openai_api_key"]
+        return openai_api_key

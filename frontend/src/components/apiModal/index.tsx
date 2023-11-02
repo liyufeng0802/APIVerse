@@ -28,8 +28,8 @@ import {
 import { useState } from 'react';
 import { MdLock } from 'react-icons/md';
 
-function APIModal(props: { setApiKey: any; sidebar?: boolean, func_2_call?: any }) {
-  const { setApiKey, sidebar } = props;
+function APIModal(props: { setApiKey: any; func_2_call?: any }) {
+  const { setApiKey } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [inputCode, setInputCode] = useState<string>('');
 
@@ -52,33 +52,19 @@ function APIModal(props: { setApiKey: any; sidebar?: boolean, func_2_call?: any 
   };
   return (
     <>
-      {sidebar ? (
-        <Button
-          onClick={onOpen}
-          display="flex"
-          variant="api"
-          fontSize={'sm'}
-          fontWeight="600"
-          borderRadius={'45px'}
-          mt="8px"
-          minH="40px"
-        >
-          Import APIs
-        </Button>
-      ) : (
-        <Button
-          onClick={onOpen}
-          minW="max-content !important"
-          p="0px"
-          me="10px"
-          _hover={{ bg: 'none' }}
-          _focus={{ bg: 'none' }}
-          _selected={{ bg: 'none' }}
-          bg="none !important"
-        >
-          <Icon w="18px" h="18px" as={MdLock} color={navbarIcon} />
-        </Button>
-      )}
+      <Button
+        onClick={onOpen}
+        display="flex"
+        variant="api"
+        fontSize={'sm'}
+        fontWeight="600"
+        borderRadius={'45px'}
+        mt="0px"
+        minH="54px"
+        w={{base: '150px', md: '150px'}}
+      >
+        Import APIs
+      </Button>
 
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

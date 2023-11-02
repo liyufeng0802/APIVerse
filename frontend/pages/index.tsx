@@ -2,8 +2,7 @@
 /*eslint-disable*/
 
 import MessageBoxChat from '@/components/MessageBox';
-import {ChatBody, OpenAIModel} from '@/types/types';
-import {Button, Flex, Icon, Img, Input, Text, useColorModeValue, useDisclosure,} from '@chakra-ui/react';
+import {Button, Flex, Icon, Img, Input, Text, useColorModeValue,} from '@chakra-ui/react';
 import {useEffect, useRef, useState} from 'react';
 import {MdAutoAwesome, MdPerson} from 'react-icons/md';
 import Bg from '../public/img/chat/bg-image.png';
@@ -18,20 +17,14 @@ type ChatMessage = {
 type ChatHistory = ChatMessage[];
 
 
-export default function Chat(props: { apiKeyApp: string }) {
-    // *** If you use .env.local variable for your API key, method which we recommend, use the apiKey variable commented below
-    const {apiKeyApp} = props;
+export default function Chat() {
     // Input States
     const [inputOnSubmit, setInputOnSubmit] = useState<string>('');
     const [inputCode, setInputCode] = useState<string>('');
     // Response message
     const [outputCode, setOutputCode] = useState<string>('');
-    // ChatGPT model
-    const [model, setModel] = useState<OpenAIModel>('gpt-3.5-turbo');
     // Loading state
     const [loading, setLoading] = useState<boolean>(false);
-
-    const {isOpen, onOpen, onClose} = useDisclosure();
 
     const [apiDocURL, setURL] = useState('');
 
@@ -82,7 +75,6 @@ export default function Chat(props: { apiKeyApp: string }) {
             // summary = "123981239812938129389123"
 
             console.log(summary)
-
 
             const newChat: ChatMessage =
                 {
@@ -156,21 +148,11 @@ export default function Chat(props: { apiKeyApp: string }) {
     }
 
     const handleTranslate = async () => {
-        const apiKey = apiKeyApp;
+        
         setInputOnSubmit(inputCode);
-
-        // Chat post conditions(maximum number of characters, valid message etc.)
-        const maxCodeLength = model === 'gpt-3.5-turbo' ? 700 : 700;
 
         if (!inputCode) {
             alert('Please enter your message.');
-            return;
-        }
-
-        if (inputCode.length > maxCodeLength) {
-            alert(
-                `Please enter code less than ${maxCodeLength} characters. You are currently at ${inputCode.length} characters.`,
-            );
             return;
         }
 
@@ -181,12 +163,6 @@ export default function Chat(props: { apiKeyApp: string }) {
 
         setOutputCode(' ');
         setLoading(true);
-        const controller = new AbortController();
-        const body: ChatBody = {
-            inputCode,
-            model,
-            apiKey,
-        };
 
         // fetchData();
         await setChatHistory(newHist);
@@ -194,25 +170,9 @@ export default function Chat(props: { apiKeyApp: string }) {
         setLoading(false);
     };
 
-
-    // API Key
-    // const [apiKey, setApiKey] = useState<string>(apiKeyApp);
     const borderColor = useColorModeValue('gray.200', 'whiteAlpha.200');
     const inputColor = useColorModeValue('navy.700', 'white');
-    const iconColor = useColorModeValue('brand.500', 'white');
-    const grayColor = useColorModeValue('gray.500', 'gray.500');
-
-    const bgIcon = useColorModeValue(
-        'linear-gradient(180deg, #FBFBFF 0%, #CACAFF 100%)',
-        'whiteAlpha.200',
-    );
     const brandColor = useColorModeValue('brand.500', 'white');
-    const buttonBg = useColorModeValue('white', 'whiteAlpha.100');
-    const gray = useColorModeValue('gray.500', 'white');
-    const buttonShadow = useColorModeValue(
-        '14px 27px 45px rgba(112, 144, 176, 0.2)',
-        'none',
-    );
     const textColor = useColorModeValue('navy.700', 'white');
     const placeholderColor = useColorModeValue(
         {color: 'gray.500'},
@@ -341,7 +301,10 @@ export default function Chat(props: { apiKeyApp: string }) {
                     >
                         Submit
                     </Button>
-                    <APIModal setApiKey={setURL} sidebar={true} func_2_call={fetchAPIImport}/>
+                    <div style={{paddingLeft:'10px'}}></div>
+                    <APIModal 
+                    setApiKey={setURL} 
+                    func_2_call={fetchAPIImport}/>
                 </Flex>
 
                 <Flex
