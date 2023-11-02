@@ -57,9 +57,9 @@ function App({ Component, pageProps }: AppProps<{}>) {
           </Portal>
           <Box
             mx="auto"
-            p={{ base: '20px', md: '30px' }}
-            pe="20px"
-            minH="100vh"
+            p={{ base: '10px', md: '30px' }}
+            pe="10px"
+            minH="50vh"
             pt="50px"
           >
             <Component apiKeyApp={apiKey} {...pageProps} />
